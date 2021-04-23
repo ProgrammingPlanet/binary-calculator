@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Binary Calculator</title>
+	<meta charset="utf-8">
+
+
+	<style type="text/css">
+		
+		#body{
+			width: 33%;
+			margin: auto;
+		}
+
+		#res{
+			background-color: lightgray;
+			border: solid;
+			height: 48px;
+			font-size: 20px;
+		}
+
+		.btn{
+			width: 25%;
+			height: 36px;
+			font-size: 18px;
+			margin: 0px;
+			float: left;
+		}
+
+		#btn0,#btn1 {
+			background-color: lightgreen;
+			color: brown;
+		}
+
+		#btnClr,#btnEql {
+			background-color: darkgreen;
+			color: white;
+		}
+
+		#btnSum,#btnSub,#btnMul,#btnDiv{
+			background-color: black;
+			color: red;
+		}
+
+	</style>
+</head>
+<body>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div id="body">
+		
+		<div id="res"></div>
+		<div id="btns">
+			<button class="btn" id="btn0">0</button>
+			<button class="btn" id="btn1">1</button>
+			<button class="btn" id="btnClr">C</button>
+			<button class="btn" id="btnEql">=</button>
+			<button class="btn" id="btnSum">+</button>
+			<button class="btn" id="btnSub">-</button>
+			<button class="btn" id="btnMul">*</button>
+			<button class="btn" id="btnDiv">/</button>
+		</div>
+
+	</div>
+
+	<script type="text/javascript">
+
+
+		function calculate(exp)
+		{
+			let op1,op2,result;
+
+			if(exp.indexOf('+') != -1)
+			{
+				exp = exp.split('+');
+				op1 = parseInt(exp[0], 2);
+				op2 = parseInt(exp[1], 2);
+
+				result = op1 + op2;
+			}
+			else if(exp.indexOf('-') != -1)
+			{
+				exp = exp.split('-');
+				op1 = parseInt(exp[0], 2);
+				op2 = parseInt(exp[1], 2);
+
+				result = op1 - op2;
+			}
+			else if(exp.indexOf('*') != -1)
+			{
+				exp = exp.split('*');
+				op1 = parseInt(exp[0], 2);
+				op2 = parseInt(exp[1], 2);
+
+				result = op1 * op2;
+			}
+			else if(exp.indexOf('/') != -1)
+			{
+				exp = exp.split('/');
+				op1 = parseInt(exp[0], 2);
+				op2 = parseInt(exp[1], 2);
+
+				result = op1 / op2;
+			}
+
+			return Number(result).toString(2);
+		}
+		
+
+		const res = document.querySelector('#res');
+		const buttons = document.querySelectorAll('#btns .btn');
+
+
+		buttons.forEach(function(btn){
+			btn.onclick = function(){
+				let title = this.innerText;
+				if(title == 'C')
+				{
+					res.innerText = '';
+				}
+				else if(title == '=')
+				{
+					res.innerText = calculate(res.innerText);
+				}
+				else{
+					res.innerText = res.innerText + title;
+				}
+			}
+		})
+
+	</script>
+
+</body>
+</html>
